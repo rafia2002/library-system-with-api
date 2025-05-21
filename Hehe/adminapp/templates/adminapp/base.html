@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Admin Panel{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-left">
+        <a href="{% url 'adminapp:list_books' %}" class="nav-logo">BookAdmin</a>
+      </div>
+      <div class="navbar-right">
+        <a href="{% url 'adminapp:add_book' %}" class="btn">Add New Book</a>
+        <a href="{% url 'adminapp:logout' %}" class="btn btn-logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-container">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

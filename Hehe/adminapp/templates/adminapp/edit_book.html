@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Book</title>
+  <style>
+    body {
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ecf0f1;
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2980b9;
+  font-weight: 700;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  color: #2c3e50;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-shadow: none;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px 14px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #2c3e50;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #2980b9;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 6px #2980b9;
+}
+
+button {
+  margin: 30px auto 0 auto;
+  display: block;
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  padding: 14px 35px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(41, 128, 185, 0.7);
+}
+
+button:hover {
+  background-color: #1c598a;
+  box-shadow: 0 6px 20px rgba(28, 89, 138, 0.9);
+}
+
+.errorlist {
+  color: #e74c3c;
+  margin-top: 6px;
+  font-size: 13px;
+  text-shadow: none;
+}
+
+small {
+  color: #7f8c8d;
+}
+
+  </style>
+</head>
+<body>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Edit Book Information</h2>
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+      {{ field }}
+      {% if field.help_text %}
+        <small>{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <div class="errorlist">{{ error }}</div>
+      {% endfor %}
+    {% endfor %}
+
+    <button type="submit">Save Changes</button>
+  </form>
+</body>
+</html>
