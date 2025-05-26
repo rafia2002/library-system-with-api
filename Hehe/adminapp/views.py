@@ -5,6 +5,7 @@ from django.contrib import messages
 from .models import Book
 from .forms import BookForm
 
+
 def admin_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -60,3 +61,4 @@ def delete_book(request, pk):
 def admin_logout(request):
     logout(request)
     return redirect('adminapp:login')
+

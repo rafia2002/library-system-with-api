@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Book List</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: #fff;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1a252f;
+      padding: 20px 30px;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #ecf0f1;
+    }
+
+    .navbar .buttons a {
+      margin-left: 10px;
+      text-decoration: none;
+      color: white;
+      background-color: #e67e22;
+      padding: 10px 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar .buttons a:hover:nth-child(1) {
+      background-color: #1abc9c;
+      /* Add Book Hover */
+    }
+
+    .navbar .buttons a:hover:nth-child(2) {
+      background-color: #c0392b;
+      /* Logout Hover */
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #ecf0f1;
+      color: #2c3e50;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .book-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding: 15px 0;
+    }
+
+    .book-item:last-child {
+      border-bottom: none;
+    }
+
+    .book-info {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .actions a {
+      margin-left: 10px;
+      text-decoration: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+
+    .actions a:first-child {
+      background-color: #2980b9;
+      /* Edit */
+    }
+
+    .actions a:first-child:hover {
+      background-color: #8e44ad;
+    }
+
+    .actions a.delete {
+      background-color: #e74c3c;
+    }
+
+    .actions a.delete:hover {
+      background-color: #c0392b;
+    }
+
+    .no-books {
+      text-align: center;
+      padding: 20px;
+      color: #555;
+    }
+
+    .messages {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      padding: 12px 20px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .message.success {
+      background-color: #27ae60;
+      color: white;
+    }
+
+    .message.error {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .message.warning {
+      background-color: #f39c12;
+      color: white;
+    }
+
+    .message.info {
+      background-color: #2980b9;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <h1>Library Management</h1>
+    <div class="buttons">
+      <a href="{% url 'adminapp:add_book' %}">Add New Book</a>
+      <a href="{% url 'adminapp:logout' %}">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Book List</h2>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="message {{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if books %}
+    {% for book in books %}
+    <div class="book-item">
+      <div style="display: flex; align-items: center;">
+        {% if book.cover_photo %}
+        <img src="{{ book.cover_photo}}" alt="Cover"
+          style="width: 60px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+        {% else %}
+        <div style="width: 60px; height: 80px; background: #bdc3c7; margin-right: 15px; border-radius: 4px;"></div>
+        {% endif %}
+        <div class="book-info">
+          <strong>{{ book.title }}</strong><br>
+          by {{ book.author }}
+        </div>
+      </div>
+      <div class="actions">
+        <a href="{%url 'adminapp:edit_book' book.id %}">Edit</a>
+        {% if book.id %}
+        <a href="{% url 'adminapp:delete_book' book.id %}" class="delete">Delete</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% endfor %}
+    {% else %}
+    <div class="no-books">No books available.</div>
+    {% endif %}
+  </div>
+
+</body>
+
+</html>

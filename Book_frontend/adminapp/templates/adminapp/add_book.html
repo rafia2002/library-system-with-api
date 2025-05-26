@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #fff;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1a252f;
+            padding: 20px;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #ecf0f1;
+        }
+
+        .navbar .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            background-color: #e74c3c;
+            padding: 10px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #c0392b;
+        }
+
+        .container {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            margin: 25px auto 0;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .errorlist {
+            color: red;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        small {
+            display: block;
+            color: #666;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h1>Library Management</h1>
+        <div class="nav-buttons">
+            <a href="{% url 'adminapp:list_books' %}">Back to List</a>
+            <a href="{% url 'adminapp:logout' %}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Add New Book</h2>
+        <!-- {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} -->
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small>{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <div class="errorlist">{{ error }}</div>
+            {% endfor %}
+            {% endfor %}
+
+            <button type="submit">Add Book</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

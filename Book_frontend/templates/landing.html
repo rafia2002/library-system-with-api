@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 80px; }
+        .button {
+            display: inline-block;
+            margin: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Book Management System</h1>
+    <a href="{% url 'adminapp:login' %}" class="button">Login as Admin</a>
+    <a href="{% url 'userapp:login' %}" class="button">Login as User</a>
+</body>
+</html>

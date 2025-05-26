@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>User Home - Library Management</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #198754;
+            color: white;
+            padding: 15px 30px;
+        }
+
+        .navbar .left,
+        .navbar .center,
+        .navbar .right {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .center {
+            flex-grow: 1;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar .left img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .navbar .right a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .navbar .right a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container for the cards */
+        .container {
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Book Card */
+        .book-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 200px;
+            text-align: center;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-card img {
+            max-width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .book-author {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .download-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #198754;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-link:hover {
+            background-color: #146c43;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .book-card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="left">
+            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile" />
+            {{ request.user.username }}
+        </div>
+        <div class="center">Library Management</div>
+        <div class="right">
+            <a href="{% url 'userapp:logout' %}">Logout</a>
+        </div>
+    </div>
+
+    <!-- Books Container -->
+    <div class="container">
+        {% for book in books %}
+        <div class="book-card">
+         
+            <img src="{{ book.cover_url }}" alt="{{ book.title }} Cover" />
+            <div class="book-title">{{ book.title }}</div>
+            <div class="book-author">by {{ book.author }}</div>
+            <a class="download-link" href="{% url 'userapp:download' book.id %}">Download</a>
+        </div>
+        {% empty %}
+        <p>No books available.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
