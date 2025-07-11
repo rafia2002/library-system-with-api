@@ -7,20 +7,29 @@ python manage.py runserver 8000
 
 # From hehe-api/
 python manage.py runserver 8001
-Make sure the API URLs in Book_frontend are pointing correctly to http://127.0.0.1:8001/ where hehe-api is running.
+Make sure the API URLs in Book_frontend are
+pointing correctly to http://127.0.0.1:8001/ where hehe-api is running.
 ________________________________________
+
+
+
 📁 Project Structure
 library-system-with-api/
 │
 ├── Book_frontend/ # Frontend Django project
-│   ├── adminapp/  # Admin functionalities (view/add/update/delete books)
-│   └── userapp/   # User functionalities (register, login, view, download books)
+│   ├── adminapp/  # Admin functionalities
+                    (view/add/update/delete books)
+│   └── userapp/   # User functionalities
+                  (register, login, view, download books)
 │
 ├── hehe-api/  # Backend Django project
 │   └── backendapi/ # Handles API logic and communication
 │
 └── README.md  # Project documentation
 ________________________________________
+
+
+
 🚀 Features
 🔐 Admin Side (adminapp)
 •	Login with Django superuser authentication
@@ -36,7 +45,12 @@ ________________________________________
 •	Built with Django REST Framework
 •	Handles API communication between Book_frontend and hehe-api
 •	Clean separation of concerns: logic in hehe-api, presentation in Book_frontend
+
+
 ________________________________________
+
+
+
 ⚙️ Technologies Used
 •	Python 3
 •	Django 5.x
@@ -44,12 +58,21 @@ ________________________________________
 •	SQLite (Two separate databases: one for each Django project)
 •	HTML, CSS (via Django templates)
 •	Bootstrap / Tailwind (if used in frontend templates)
+
+
 ________________________________________
+
+
 🗃️ Database
 •	Two separate SQLite databases:
 o	Book_frontend for managing frontend user/admin auth and models
 o	hehe-api for handling API logic and models
+
+
 ________________________________________
+
+
+
 🔧 Installation & Setup
 1. Clone the repository
 git clone https://github.com/your-username/library-system-with-api.git
