@@ -1,5 +1,6 @@
 📚 Library System with API
-A full-stack Library Management System built with Django and Django REST Framework, split into two separate Django projects for a clear separation of frontend and backend responsibilities.
+A full-stack Library Management System built with Django and Django REST Framework,
+split into two separate Django projects for a clear separation of frontend and backend responsibilities.
 
 # From Book_frontend/
 python manage.py runserver 8000
@@ -11,14 +12,14 @@ ________________________________________
 📁 Project Structure
 library-system-with-api/
 │
-├── Book_frontend/            # Frontend Django project
-│   ├── adminapp/             # Admin functionalities (add/update/delete books)
-│   └── userapp/              # User functionalities (register, login, view, download books)
+├── Book_frontend/ # Frontend Django project
+│   ├── adminapp/  # Admin functionalities (view/add/update/delete books)
+│   └── userapp/   # User functionalities (register, login, view, download books)
 │
-├── hehe-api/                 # Backend Django project
-│   └── backendapi/           # Handles API logic and communication
+├── hehe-api/  # Backend Django project
+│   └── backendapi/ # Handles API logic and communication
 │
-└── README.md                 # Project documentation
+└── README.md  # Project documentation
 ________________________________________
 🚀 Features
 🔐 Admin Side (adminapp)
